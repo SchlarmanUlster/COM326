@@ -47,12 +47,72 @@ int main() {
 
 	//Challenge 4
 
-	int num{ HowMany() };
+	/*int num{ HowMany() };
 	int* ptr{ CreateInts(num) };
 	ReadInts(ptr, num);
 	DisplayInts(ptr, num);
 
-	delete[] ptr;
+	delete[] ptr;*/
+
+
+
+	//Challenge 5
+
+	/*std::unique_ptr<int> uniquePtr{ std::make_unique<int>(32) };
+	std::cout << "Value: " << *uniquePtr << std::endl;
+	std::cout << "ptr address: " << &uniquePtr << std::endl;
+	std::cout << "address pointed to: " << &*uniquePtr << std::endl;
+
+	std::unique_ptr<int> uniquePtrB{ std::move(uniquePtr) };
+
+	std::cout << "Value: " << *uniquePtrB << std::endl;
+	std::cout << "ptr address: " << &uniquePtrB << std::endl;
+	std::cout << "address pointed to: " << &*uniquePtrB << std::endl;
+*/
+	//Errors out, illegal address access
+	/*std::cout << "Value: " << *uniquePtr << std::endl;
+	std::cout << "ptr address: " << &uniquePtr << std::endl;
+	std::cout << "address pointed to: " << &*uniquePtr << std::endl;*/
+
+	//Challenge 6
+
+	std::shared_ptr<std::string> sharedPointerA{ std::make_shared<std::string>("") };
+
+	std::cout << "Enter shared string: " << std::endl;
+	std::cin >> *sharedPointerA;
+
+	std::cout << "shared ptr address: " << &sharedPointerA << std::endl;
+	std::cout << "address pointed to: " << &*sharedPointerA << std::endl;
+	std::cout << "ptr value: " << *sharedPointerA << std::endl;
+	std::cout << "shared ptr reference count: " << sharedPointerA.use_count() << std::endl << std::endl;
+
+	std::shared_ptr<std::string> sharedPointerB{ sharedPointerA };
+
+	std::cout << "shared ptr address: " << &sharedPointerB << std::endl;
+	std::cout << "address pointed to: " << &*sharedPointerB << std::endl;
+	std::cout << "ptr value: " << *sharedPointerB << std::endl;
+	std::cout << "shared ptr reference count: " << sharedPointerB.use_count() << std::endl << std::endl;
+
+	std::shared_ptr<std::string> sharedPointerC{ sharedPointerA };
+
+	std::cout << "shared ptr address: " << &sharedPointerC << std::endl;
+	std::cout << "address pointed to: " << &*sharedPointerC << std::endl;
+	std::cout << "ptr value: " << *sharedPointerC << std::endl;
+	std::cout << "shared ptr reference count: " << sharedPointerC.use_count() << std::endl << std::endl;
+
+	sharedPointerA.reset();
+
+	std::cout << "shared ptr address: " << &sharedPointerB << std::endl;
+	std::cout << "address pointed to: " << &*sharedPointerB << std::endl;
+	std::cout << "ptr value: " << *sharedPointerB << std::endl;
+	std::cout << "shared ptr reference count: " << sharedPointerB.use_count() << std::endl << std::endl;
+
+	std::cout << "shared ptr address: " << &sharedPointerC << std::endl;
+	std::cout << "address pointed to: " << &*sharedPointerC << std::endl;
+	std::cout << "ptr value: " << *sharedPointerC << std::endl;
+	std::cout << "shared ptr reference count: " << sharedPointerC.use_count() << std::endl << std::endl;
+
+
 	return 0;
 }
 
@@ -69,7 +129,7 @@ void PrintStackArrayAddresses(int arr[], int length) {
 void SetFloatValues(float* floatArray) {
 	float* floatTemp = floatArray;
 	for (int i = 0; i < 10; i++){
-		*floatTemp = i;
+		*floatTemp = (float) i;
 		*floatTemp++;
 	}
 }
